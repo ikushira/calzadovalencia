@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calzado Valencia</title>
+  <!-- Tailwind CSS para diseño moderno y responsive -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fuente personalizada -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Hoja de estilos personalizada -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+  <!-- Header con logo y barra de navegación -->
+  <header class="bg-white shadow p-4 flex flex-col md:flex-row md:justify-between md:items-center">
+    <!-- Logo -->
+    <div class="flex items-center justify-between w-full md:w-auto">
+      <div class="flex items-center space-x-2">
+        <img src="img/logo-calzado-valencia.jpeg" alt="Logo Calzado Valencia" class="h-10 w-auto">
+        <h1 class="text-xl md:text-2xl font-bold text-gray-800">Calzado Valencia</h1>
+      </div>
+      <!-- Botón panel móvil -->
+      <button onclick="window.location.href='panel.html'" class="md:hidden btn-primario">Panel</button>
+    </div>
+    <!-- Navegación principal -->
+    <nav class="hidden md:flex space-x-6 mt-4 md:mt-0">
+      <a href="#nuevo" class="text-gray-700 hover:text-indigo-600 font-semibold">Lo Nuevo</a>
+      <a href="#mujer" class="text-gray-700 hover:text-indigo-600 font-semibold">Mujer</a>
+      <a href="#hombre" class="text-gray-700 hover:text-indigo-600 font-semibold">Hombre</a>
+      <a href="#ninas" class="text-gray-700 hover:text-indigo-600 font-semibold">Niñas</a>
+      <a href="#ninos" class="text-gray-700 hover:text-indigo-600 font-semibold">Niños</a>
+      <a href="#colegial" class="text-gray-700 hover:text-indigo-600 font-semibold">Colegial</a>
+      <a href="#marcas" class="text-gray-700 hover:text-indigo-600 font-semibold">Marcas</a>
+      <button onclick="window.location.href='panel.html'" class="btn-primario">Ir al Panel</button>
+    </nav>
+  </header>
+
+  <!-- Banner principal -->
+  <section class="relative h-96 bg-cover bg-center" style="background-image: url('img/banner-calzado.jpg');">
+    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center px-4">
+      <div class="text-center text-white max-w-2xl">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4">Comodidad y estilo</h2>
+        <p class="text-lg md:text-xl mb-6">Descubre la nueva colección de temporada</p>
+        <a href="#catalogo" class="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-3 rounded shadow">Ver Catálogo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categorías destacadas -->
+  <section class="p-4 sm:p-6 md:p-10 bg-white">
+    <h3 class="titulo-seccion">Categorías destacadas</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 text-center">
+      <div id="nuevo" class="categoria-box">
+        <img src="img/nuevo.jpg" alt="Lo Nuevo" class="w-full h-32 object-cover rounded">
+        <h4 class="mt-2 font-semibold">Lo Nuevo</h4>
+      </div>
+      <div id="mujer" class="categoria-box">
+        <img src="img/mujer.jpg" alt="Mujer" class="w-full h-32 object-cover rounded">
+        <h4 class="mt-2 font-semibold">Mujer</h4>
+      </div>
+      <div id="hombre" class="categoria-box">
+        <img src="img/hombre.jpg" alt="Hombre" class="w-full h-32 object-cover rounded">
+        <h4 class="mt-2 font-semibold">Hombre</h4>
+      </div>
+      <div id="ninas" class="categoria-box">
+        <img src="img/ninas.jpg" alt="Niñas" class="w-full h-32 object-cover rounded">
+        <h4 class="mt-2 font-semibold">Niñas</h4>
+      </div>
+      <div id="ninos" class="categoria-box">
+        <img src="img/ninos.jpg" alt="Niños" class="w-full h-32 object-cover rounded">
+        <h4 class="mt-2 font-semibold">Niños</h4>
+      </div>
+      <div id="colegial" class="categoria-box">
+        <img src="img/colegial.jpg" alt="Colegial" class="w-full h-32 object-cover rounded">
+        <h4 class="mt-2 font-semibold">Colegial</h4>
+      </div>
+      <div id="marcas" class="categoria-box">
+        <img src="img/marcas.jpg" alt="Marcas" class="w-full h-32 object-cover rounded">
+        <h4 class="mt-2 font-semibold">Marcas</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Productos destacados -->
+  <section id="catalogo" class="p-4 sm:p-6 md:p-10">
+    <h3 class="titulo-seccion">Productos destacados</h3>
+    <div id="productosDestacados" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- Testimonios -->
+  <section class="bg-white p-10">
+    <h3 class="titulo-seccion">Lo que dicen nuestros clientes</h3>
+    <div class="grid gap-6 md:grid-cols-3">
+      <div class="testimonio">
+        <p class="italic">"Calzado Valencia superó mis expectativas. ¡Muy recomendados!"</p>
+        <p class="mt-4 font-semibold text-right">- Ana María</p>
+      </div>
+      <div class="testimonio">
+        <p class="italic">"Excelente calidad y entrega rápida. Volveré a comprar."</p>
+        <p class="mt-4 font-semibold text-right">- Luis F.</p>
+      </div>
+      <div class="testimonio">
+        <p class="italic">"El calzado para niños es hermoso y duradero. A mi hija le encantó."</p>
+        <p class="mt-4 font-semibold text-right">- Patricia G.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mapa de ubicación -->
+  <section class="bg-gray-100 p-10">
+    <h3 class="titulo-seccion">Visítanos</h3>
+    <div class="w-full h-64">
+      <iframe class="w-full h-full rounded" src="https://www.google.com/maps/embed?..." allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- Pie de página completo -->
+  <footer class="bg-gray-800 text-white p-10">
+    <div class="grid md:grid-cols-4 gap-6">
+      <div>
+        <h4 class="font-bold mb-4">Contacto</h4>
+        <p>Teléfono: +57 324 561 3172</p>
+        <p>Correo: 
+          calzadovalencia24@gmail.com</p>
+        <p>Dirección: Calle 28 #23-19, Bucaramanga</p>
+      </div>
+      <div>
+        <h4 class="font-bold mb-4">Información</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="footer-link">Sobre Nosotros</a></li>
+          <li><a href="#" class="footer-link">Política de Privacidad</a></li>
+          <li><a href="#" class="footer-link">Términos y Condiciones</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-4">Ayuda</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="footer-link">Preguntas Frecuentes</a></li>
+          <li><a href="#" class="footer-link">Seguimiento de Pedido</a></li>
+          <li><a href="#" class="footer-link">Devoluciones</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-4">Síguenos</h4>
+        <div class="flex space-x-4">
+          <a href="#" class="hover:text-yellow-400">Facebook</a>
+          <a href="#" class="hover:text-yellow-400">Instagram</a>
+          <a href="#" class="hover:text-yellow-400">TikTok</a>
+        </div>
+        <h4 class="font-bold mt-4 mb-2">Métodos de Pago</h4>
+        <p>Visa, MasterCard, PSE, Nequi, Efecty</p>
+      </div>
+    </div>
+    <div class="text-center mt-10 text-sm border-t border-gray-700 pt-4">© 2025 Ikushira Dev - Calzado Valencia. Todos los derechos reservados.</div>
+  </footer>
+
+  <!-- Toast de confirmación -->
+  <div id="toast" class="fixed bottom-5 right-5 bg-green-600 text-white px-4 py-2 rounded shadow-lg hidden transition-opacity duration-300 z-50">
+    Producto agregado al carrito.
+  </div>
+
+  <!-- Firebase + lógica -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCQeOXPe_oCsg7czvQ4F_LKokAdvNTHrW4",
+        authDomain: "calzado-valencia.firebaseapp.com",
+        projectId: "calzado-valencia",
+        storageBucket: "calzado-valencia.firebasestorage.app",
+        messagingSenderId: "885392324110",
+        appId: "1:885392324110:web:87347aff4ff12650cbae5f"
+      };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const contenedor = document.getElementById("productosDestacados");
+
+    async function cargarProductos() {
+      const querySnapshot = await getDocs(collection(db, "productos"));
+      querySnapshot.forEach((doc) => {
+        const producto = doc.data();
+        const card = document.createElement("div");
+        card.className = "tarjeta-producto";
+        card.innerHTML = `
+          <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full h-48 object-cover rounded">
+          <h4 class="font-semibold mt-4">${producto.nombre}</h4>
+          <p class="text-gray-600 mt-2">$${producto.precio}</p>
+          <button onclick='agregarAlCarrito(${JSON.stringify({ id: doc.id, ...producto })})' class="mt-4 btn-primario">Agregar al carrito</button>
+        `;
+        contenedor.appendChild(card);
+      });
+    }
+
+    function agregarAlCarrito(producto) {
+      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      carrito.push(producto);
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      mostrarToast();
+    }
+
+    function mostrarToast() {
+      const toast = document.getElementById("toast");
+      toast.classList.remove("hidden");
+      toast.style.opacity = "1";
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        setTimeout(() => toast.classList.add("hidden"), 300);
+      }, 2000);
+    }
+
+    cargarProductos();
+  </script>
+</body>
+</html>

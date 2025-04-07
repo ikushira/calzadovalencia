@@ -1,0 +1,182 @@
+/*
+  Archivo: styles.css
+  Propósito: Estilizar elementos comunes con clases reutilizables para Calzado Valencia sin usar @apply
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* Aplicar fuente Montserrat a todo el cuerpo */
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Botón primario reutilizable */
+.btn-primario {
+  background-color: #4f46e5; /* indigo-600 */
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.btn-primario:hover {
+  background-color: #4338ca; /* indigo-700 */
+}
+
+/* Estilo de títulos de sección */
+.titulo-seccion {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700;
+  text-align: center;
+  color: #1f2937; /* gray-800 */
+  margin-bottom: 1.5rem;
+}
+
+/* Estilo de testimonios */
+.testimonio {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  text-align: center;
+}
+
+.testimonio img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  margin: 0 auto 0.5rem auto;
+}
+
+.testimonio h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.testimonio p {
+  font-size: 0.875rem;
+  color: #4b5563; /* gray-600 */
+}
+
+/* Footer */
+footer {
+  background-color: #1f2937; /* gray-800 */
+  color: white;
+  padding: 2.5rem 1rem;
+}
+
+footer h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+footer ul li {
+  margin-bottom: 0.5rem;
+}
+
+footer a {
+  color: #d1d5db; /* gray-300 */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #facc15; /* yellow-400 */
+}
+
+footer .iconos-redes a {
+  font-size: 1.25rem;
+  margin-right: 1rem;
+}
+
+footer .iconos-pago img {
+  height: 1.5rem;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+footer .copy {
+  font-size: 0.875rem;
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #9ca3af; /* gray-400 */
+}
+
+/* Soluciona visibilidad de navegación en pantallas md+ */
+@media (min-width: 768px) {
+  nav {
+    display: flex !important;
+  }
+}
+
+/* Estilo del header */
+.encabezado-principal {
+  background-color: #dc2626; /* rojo como en la imagen */
+  color: white;
+  padding: 1rem;
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.logo {
+  height: 4rem;
+}
+
+/* Menú de navegación */
+.menu-navegacion {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: row;
+}
+
+/* Enlaces de navegación */
+.menu-navegacion a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.menu-navegacion a.activo {
+  background-color: #1f2937; /* fondo oscuro */
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Buscador */
+.buscador {
+  background-color: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.buscador input {
+  border: none;
+  outline: none;
+  padding: 0.25rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: transparent;
+}
+
+.buscador i {
+  width: 16px;
+  height: 16px;
+}

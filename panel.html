@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Administración - Calzado Valencia</title>
+    <!-- TailwindCSS para estilos rápidos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Firebase Firestore y funciones -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+      import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+      // Configuración de Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyCQeOXPe_oCsg7czvQ4F_LKokAdvNTHrW4",
+        authDomain: "calzado-valencia.firebaseapp.com",
+        projectId: "calzado-valencia",
+        storageBucket: "calzado-valencia.appspot.com",
+        messagingSenderId: "885392324110",
+        appId: "1:885392324110:web:87347aff4ff12650cbae5f",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      const productosContainer = document.getElementById("productos-container");
+
+      // Función para cargar productos desde Firestore
+      async function cargarProductos() {
+        const querySnapshot = await getDocs(collection(db, "productos"));
+        querySnapshot.forEach((doc) => {
+          const producto = doc.data();
+          const productoElement = document.createElement("div");
+          productoElement.className = "border p-4 rounded shadow-lg bg-white";
+          productoElement.innerHTML = `
+            <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full h-48 object-cover mb-4 rounded">
+            <h4 class="font-semibold">${producto.nombre}</h4>
+            <p class="text-gray-600">Precio: $${producto.precio}</p>
+            <p class="text-gray-600">Categoría: ${producto.categoria}</p>
+            <button onclick="editarProducto('${doc.id}', '${producto.nombre}', '${producto.precio}', '${producto.imagen}', '${producto.categoria}')" class="bg-blue-500 text-white px-4 py-2 rounded mt-2">Editar</button>
+            <button onclick="eliminarProducto('${doc.id}')" class="bg-red-500 text-white px-4 py-2 rounded mt-2">Eliminar</button>
+          `;
+          productosContainer.appendChild(productoElement);
+        });
+      }
+
+      // Función para agregar producto
+      document.getElementById("agregar-producto-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const nombre = e.target.nombre.value;
+        const precio = e.target.precio.value;
+        const imagen = e.target.imagen.value;
+        const categoria = e.target.categoria.value;
+
+        await addDoc(collection(db, "productos"), {
+          nombre,
+          precio,
+          imagen,
+          categoria
+        });
+
+        // Limpiar formulario
+        e.target.reset();
+        productosContainer.innerHTML = ''; // Limpiar lista de productos
+        cargarProductos(); // Recargar productos
+      });
+
+      // Función para editar producto
+      function editarProducto(id, nombre, precio, imagen, categoria) {
+        document.getElementById("nombre").value = nombre;
+        document.getElementById("precio").value = precio;
+        document.getElementById("imagen").value = imagen;
+        document.getElementById("categoria").value = categoria;
+        document.getElementById("editar-producto-btn").onclick = () => {
+          actualizarProducto(id);
+        };
+      }
+
+      // Función para actualizar producto
+      async function actualizarProducto(id) {
+        const nombre = document.getElementById("nombre").value;
+        const precio = document.getElementById("precio").value;
+        const imagen = document.getElementById("imagen").value;
+        const categoria = document.getElementById("categoria").value;
+
+        await updateDoc(doc(db, "productos", id), {
+          nombre,
+          precio,
+          imagen,
+          categoria
+        });
+
+        // Limpiar formulario y recargar productos
+        document.getElementById("formulario-producto").reset();
+        productosContainer.innerHTML = '';
+        cargarProductos();
+      }
+
+      // Función para eliminar producto
+      async function eliminarProducto(id) {
+        await deleteDoc(doc(db, "productos", id));
+        productosContainer.innerHTML = ''; // Limpiar lista de productos
+        cargarProductos(); // Recargar productos
+      }
+
+      // Cargar productos al iniciar
+      cargarProductos();
+    </script>
+  </head>
+  <body class="font-sans bg-gray-100 min-h-screen">
+    <div class="p-6 bg-white shadow-md">
+      <h2 class="text-2xl font-semibold">Panel de Administración de Productos</h2>
+    </div>
+
+    <!-- Formulario para agregar un producto -->
+    <div class="p-6 bg-white mt-6">
+      <h3 class="text-xl font-semibold mb-4">Agregar Producto</h3>
+      <form id="agregar-producto-form" class="space-y-4">
+        <div>
+          <label for="nombre" class="block text-sm">Nombre del Producto</label>
+          <input type="text" id="nombre" name="nombre" required class="border p-2 rounded w-full" />
+        </div>
+        <div>
+          <label for="precio" class="block text-sm">Precio</label>
+          <input type="number" id="precio" name="precio" required class="border p-2 rounded w-full" />
+        </div>
+        <div>
+          <label for="imagen" class="block text-sm">URL de la Imagen</label>
+          <input type="text" id="imagen" name="imagen" required class="border p-2 rounded w-full" />
+        </div>
+        <div>
+          <label for="categoria" class="block text-sm">Categoría</label>
+          <input type="text" id="categoria" name="categoria" required class="border p-2 rounded w-full" />
+        </div>
+        <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded">Agregar Producto</button>
+      </form>
+    </div>
+
+    <!-- Lista de productos -->
+    <div class="p-6 bg-white mt-6" id="productos-container">
+      <h3 class="text-xl font-semibold mb-4">Productos</h3>
+      <!-- Aquí se mostrarán los productos -->
+    </div>
+  </body>
+</html>

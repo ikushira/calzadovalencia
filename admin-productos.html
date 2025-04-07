@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Productos - Calzado Valencia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body class="bg-gray-100 p-4">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded shadow">
+      <h1 class="text-2xl font-bold mb-4">Administrar Productos</h1>
+
+      <div class="mb-6">
+        <h2 class="text-xl font-semibold mb-2">Nuevo Producto</h2>
+        <form id="form-producto" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" id="nombre" placeholder="Nombre" class="p-2 border rounded" required />
+          <input type="number" id="precio" placeholder="Precio" class="p-2 border rounded" required />
+          <input type="text" id="categoria" placeholder="Categoría" class="p-2 border rounded" />
+          <textarea id="descripcion" placeholder="Descripción" class="p-2 border rounded col-span-2"></textarea>
+          <input type="file" id="imagen" accept="image/*" class="col-span-2" />
+          <button type="submit" class="bg-green-600 text-white py-2 rounded col-span-2">Guardar Producto</button>
+        </form>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Productos Creados</h2>
+        <div id="lista-productos" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+      </div>
+    </div>
+
+    <!-- Firebase scripts -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+      import {
+        getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc
+      } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+      import {
+        getStorage, ref, uploadBytes, getDownloadURL
+      } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-storage.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCQeOXPe_oCsg7czvQ4F_LKokAdvNTHrW4",
+        authDomain: "calzado-valencia.firebaseapp.com",
+        projectId: "calzado-valencia",
+        storageBucket: "calzado-valencia.appspot.com",
+        messagingSenderId: "885392324110",
+        appId: "1:885392324110:web:87347aff4ff12650cbae5f"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const auth = getAuth(app);
+      const storage = getStorage(app);
+
+      const form = document.getElementById("form-producto");
+      const lista = document.getElementById("lista-productos");
+
+      // Cargar productos existentes
+      const cargarProductos = async () => {
+        lista.innerHTML = "";
+        const snap = await getDocs(collection(db, "productos"));
+        snap.forEach((docu) => {
+          const data = docu.data();
+          const div = document.createElement("div");
+          div.className = "border p-4 rounded bg-gray-50";
+
+          div.innerHTML = `
+            <h3 class="font-bold">${data.nombre}</h3>
+            <p><strong>Precio:</strong> $${data.precio}</p>
+            <p><strong>Categoría:</strong> ${data.categoria || "-"}</p>
+            <p class="mb-2">${data.descripcion || ""}</p>
+            ${data.imagenURL ? `<img src="${data.imagenURL}" class="h-32 object-cover mb-2 rounded" />` : ""}
+            <button class="bg-yellow-500 text-white px-3 py-1 rounded mr-2" onclick="editarProducto('${docu.id}', ${JSON.stringify(data).replace(/"/g, '&quot;')})">Editar</button>
+            <button class="bg-red-600 text-white px-3 py-1 rounded" onclick="eliminarProducto('${docu.id}')">Eliminar</button>
+          `;
+          lista.appendChild(div);
+        });
+      };
+
+      // Subir imagen a Firebase Storage
+      const subirImagen = async (archivo) => {
+        const nombre = `${Date.now()}-${archivo.name}`;
+        const referencia = ref(storage, `productos/${nombre}`);
+        await uploadBytes(referencia, archivo);
+        return await getDownloadURL(referencia);
+      };
+
+      // Guardar producto
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const nombre = form.nombre.value;
+        const precio = parseFloat(form.precio.value);
+        const categoria = form.categoria.value;
+        const descripcion = form.descripcion.value;
+        const imagen = form.imagen.files[0];
+
+        let imagenURL = "";
+        if (imagen) {
+          imagenURL = await subirImagen(imagen);
+        }
+
+        await addDoc(collection(db, "productos"), {
+          nombre, precio, categoria, descripcion, imagenURL
+        });
+
+        form.reset();
+        await cargarProductos();
+        Swal.fire("Producto creado", "Se ha guardado correctamente", "success");
+      });
+
+      // Eliminar producto
+      window.eliminarProducto = async (id) => {
+        if (confirm("¿Seguro que deseas eliminar este producto?")) {
+          await deleteDoc(doc(db, "productos", id));
+          await cargarProductos();
+        }
+      };
+
+      // Editar producto (simplificado: rellena el formulario para re-guardar)
+      window.editarProducto = (id, data) => {
+        form.nombre.value = data.nombre;
+        form.precio.value = data.precio;
+        form.categoria.value = data.categoria || "";
+        form.descripcion.value = data.descripcion || "";
+
+        form.onsubmit = async (e) => {
+          e.preventDefault();
+          const nombre = form.nombre.value;
+          const precio = parseFloat(form.precio.value);
+          const categoria = form.categoria.value;
+          const descripcion = form.descripcion.value;
+          const imagen = form.imagen.files[0];
+
+          let imagenURL = data.imagenURL;
+          if (imagen) {
+            imagenURL = await subirImagen(imagen);
+          }
+
+          await updateDoc(doc(db, "productos", id), {
+            nombre, precio, categoria, descripcion, imagenURL
+          });
+
+          form.reset();
+          form.onsubmit = null;
+          await cargarProductos();
+          Swal.fire("Producto actualizado", "", "success");
+        };
+      };
+
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          Swal.fire("Acceso restringido", "Debes iniciar sesión", "warning");
+          window.location.href = "/"; // Redirige a la principal
+          return;
+        }
+
+        const userDoc = await getDocs(collection(db, "usuarios"));
+        const isAdmin = userDoc.docs.find(doc => doc.id === user.uid && doc.data().rol === "admin");
+        if (!isAdmin) {
+          Swal.fire("No autorizado", "No tienes permisos para ver esta página", "error");
+          window.location.href = "/";
+        } else {
+          cargarProductos();
+        }
+      });
+    </script>
+  </body>
+</html>
