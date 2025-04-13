@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel de Administración</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="js/panel.js"></script>
+</head>
+<body class="bg-gray-100 p-6 font-sans">
+  <header class="flex justify-between items-center p-4 bg-gray-800 text-white">
+    <h1 class="text-xl font-bold">Panel de Administración</h1>
+    <button id="logout-btn" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">Cerrar sesión</button>
+  </header>
+  <div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
+    <h2 class="text-2xl font-bold mb-4">Agregar producto</h2>
+    <form id="product-form" class="space-y-4">
+      <input type="text" placeholder="Nombre del producto" id="name" class="w-full p-2 border rounded" required />
+      <input type="number" placeholder="Precio" id="price" class="w-full p-2 border rounded" required />
+      <input type="text" placeholder="URL de imagen" id="image" class="w-full p-2 border rounded" required />
+      <input type="text" placeholder="Categoría" id="category" class="w-full p-2 border rounded" required />
+      <button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Agregar</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calzado Valencia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 font-[Montserrat]">
+
+  <!-- Header -->
+  <header class="bg-red-600 text-white p-4 flex flex-col md:flex-row md:justify-between md:items-center">
+    <div class="flex items-center space-x-2">
+      <img src="https://i.imgur.com/ruqJ9Lp.png" alt="Calzado Valencia" class="h-10 w-auto">
+      <h1 class="text-xl md:text-2xl font-bold">Calzado Valencia</h1>
+    </div>
+    <nav class="flex items-center space-x-4 mt-4 md:mt-0 text-sm font-semibold">
+      <a href="#nuevo" class="hover:text-yellow-300">LO NUEVO</a>
+      <a href="#mujer" class="hover:text-yellow-300">Mujer</a>
+      <a href="#hombre" class="hover:text-yellow-300">Hombre</a>
+      <a href="#ninos" class="hover:text-yellow-300">Niñ@s</a>
+      <a href="#colegial" class="hover:text-yellow-300">Colegial</a>
+      <a href="#accesorios" class="hover:text-yellow-300">Accesorios</a>
+      <a href="#marcas" class="hover:text-yellow-300">Marcas</a>
+      <div class="flex items-center bg-white text-black rounded px-2">
+        <input type="text" placeholder="Buscar" class="bg-transparent outline-none px-2 py-1 text-sm" />
+        <i class="fas fa-search text-sm"></i>
+      </div>
+      <a href="#tiendas" class="hover:text-yellow-300"><i class="fas fa-map-marker-alt"></i> Tiendas</a>
+      <a href="#carrito" class="hover:text-yellow-300"><i class="fas fa-shopping-bag"></i> Carrito</a>
+      <a href="#favoritos" class="hover:text-yellow-300"><i class="fas fa-heart"></i> Favoritos</a>
+      <!-- Botón de ingreso al panel -->
+      <button onclick="window.location.href='panel.html'" class="bg-white text-red-600 px-4 py-2 rounded">Panel</button>
+    </nav>
+  </header>
+
+  <!-- Banner -->
+  <section class="relative h-96 bg-cover bg-center" style="background-image: url('img/banner-calzado.jpg');">
+    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center px-4">
+      <div class="text-center text-white max-w-2xl">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4">Comodidad y estilo</h2>
+        <p class="text-lg md:text-xl mb-6">Descubre la nueva colección de temporada</p>
+        <a href="#catalogo" class="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-3 rounded shadow">Ver Catálogo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categorías destacadas -->
+  <section class="p-4 sm:p-6 md:p-10 bg-white">
+    <h3 class="text-2xl font-bold mb-6 text-center">Categorías destacadas</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 text-center">
+      <div id="nuevo"><img src="img/nuevo.jpg" class="w-full h-32 object-cover rounded" alt="Lo Nuevo"><h4 class="mt-2 font-semibold">Lo Nuevo</h4></div>
+      <div id="mujer"><img src="img/mujer.jpg" class="w-full h-32 object-cover rounded" alt="Mujer"><h4 class="mt-2 font-semibold">Mujer</h4></div>
+      <div id="hombre"><img src="img/hombre.jpg" class="w-full h-32 object-cover rounded" alt="Hombre"><h4 class="mt-2 font-semibold">Hombre</h4></div>
+      <div id="ninos"><img src="img/ninos.jpg" class="w-full h-32 object-cover rounded" alt="Niñ@s"><h4 class="mt-2 font-semibold">Niñ@s</h4></div>
+      <div id="colegial"><img src="img/colegial.jpg" class="w-full h-32 object-cover rounded" alt="Colegial"><h4 class="mt-2 font-semibold">Colegial</h4></div>
+      <div id="accesorios"><img src="img/accesorios.jpg" class="w-full h-32 object-cover rounded" alt="Accesorios"><h4 class="mt-2 font-semibold">Accesorios</h4></div>
+      <div id="marcas"><img src="img/marcas.jpg" class="w-full h-32 object-cover rounded" alt="Marcas"><h4 class="mt-2 font-semibold">Marcas</h4></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white p-10">
+    <div class="grid md:grid-cols-4 gap-6">
+      <div>
+        <h4 class="font-bold mb-4">Contacto</h4>
+        <p>Teléfono: +57 300 123 4567</p>
+        <p>Correo: contacto@calzadovalencia.com</p>
+        <p>Dirección: Calle 10 #20-30, Bucaramanga</p>
+      </div>
+      <div>
+        <h4 class="font-bold mb-4">Información</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-yellow-400">Sobre Nosotros</a></li>
+          <li><a href="#" class="hover:text-yellow-400">Política de Privacidad</a></li>
+          <li><a href="#" class="hover:text-yellow-400">Términos y Condiciones</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-4">Ayuda</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-yellow-400">Preguntas Frecuentes</a></li>
+          <li><a href="#" class="hover:text-yellow-400">Seguimiento de Pedido</a></li>
+          <li><a href="#" class="hover:text-yellow-400">Devoluciones</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-4">Síguenos</h4>
+        <div class="flex space-x-4 text-xl">
+          <a href="#" class="hover:text-yellow-400"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-yellow-400"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <h4 class="font-bold mt-4 mb-2">Métodos de Pago</h4>
+        <p>Visa, MasterCard, PSE, Nequi, Efecty</p>
+      </div>
+    </div>
+    <div class="text-center mt-10 text-sm border-t border-gray-700 pt-4">© 2025 Calzado Valencia. Todos los derechos reservados.</div>
+  </footer>
+
+</body>
+</html>
+``` 
